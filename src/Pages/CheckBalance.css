@@ -1,0 +1,60 @@
+/* Container styling */
+.check-balance-container {
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+  }
+
+  h2{
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  /* Button styling */
+  .check-balance-button {
+    width: 80%;
+    padding: 10px;
+    font-size: 16px;
+    color: white;
+    background-color: #007bff; /* Bootstrap Primary color */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 30px;
+  }
+  
+  .check-balance-button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Label and input styling */
+  .balance-display {
+    margin-top: 45px;
+  }
+  
+  .balance-label {
+    font-weight: bold;
+  }
+  
+  .balance-input {
+    margin-left: 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* Error message styling */
+  .error-message {
+    color: red;
+    margin-top: 10px;
+    font-size: 14px;
+  }
+  

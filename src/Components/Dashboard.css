@@ -1,0 +1,142 @@
+/* Dashboard.css */
+
+/* Container for the entire dashboard */
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+    gap: 30px;
+}
+
+/* Navbar styling */
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    background-color: #007bff; /* Bootstrap primary color */
+    color: white;
+    padding: 0 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    flex-shrink: 0;
+}
+
+/* Header - Left Section */
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.hamburger-menu {
+    font-size: 24px;
+    border: none;
+    background: none;
+    color: white;
+    cursor: pointer;
+    margin-right: 15px;
+    display: none; /* Hidden by default */
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Header - Right Section */
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-name {
+    font-size: 16px;
+}
+
+.profile-logo {
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    color: #007bff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Sidebar styling */
+.dashboard-sidebar {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    height: calc(100% - 60px);
+    width: 240px;
+    background-color: #343a40; 
+    color: white;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    z-index: 999;
+    overflow-y: auto;
+    transition: transform 0.3s ease;
+    gap: 30px;
+}
+
+/* Sidebar links */
+.dashboard-sidebar nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 35px; /* Space between options */
+}
+
+.dashboard-sidebar nav ul li {
+    border-bottom: 1px solid #495057;
+}
+
+.dashboard-sidebar nav ul li a {
+    display: block;
+    padding: 15px 20px;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.dashboard-sidebar nav ul li a:hover {
+    background-color: #495057;
+}
+
+
+/* Main content styling */
+.dashboard-content {
+    margin-left: 240px;         
+    padding: 20px;
+    flex-grow: 1;
+    background-color: #f5f5f5;
+    transition: margin-left 0.3s ease;
+  
+}
+
+/* Mobile view adjustments */
+@media (max-width: 768px) {
+    .hamburger-menu {
+        display: block; /* Show hamburger in mobile view */
+    }
+
+    .dashboard-sidebar {
+        transform: translateX(-100%); /* Hide sidebar by default */
+    }
+
+    .dashboard-sidebar.open {
+        transform: translateX(0); /* Show sidebar on toggle */
+    }
+
+    .dashboard-content {
+        margin-left: 0; /* Content takes full width */
+    }
+}

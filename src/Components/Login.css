@@ -1,0 +1,86 @@
+
+/* src/Login.css */
+
+/* Reset and global styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Body Styling */
+  .login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f9;
+  }
+  
+  /* Container Styling */
+  .form-container {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+  }
+  
+  /* Title Styling */
+  .title {
+    margin-bottom: 1.5rem;
+    color: #333;
+  }
+  
+  /* Form Styling */
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  /* Input Styling */
+  .input-field {
+    padding: 0.8rem;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+  
+  .input-field:focus {
+    border-color: #5b9bd5;
+  }
+  
+  /* Button Styling */
+  .submit-button {
+    padding: 0.8rem;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #5b9bd5;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .submit-button:hover {
+    background-color: #3a7bbd;
+  }
+  
+  /* Note and Link Styling */
+  .note {
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 1rem;
+  }
+  
+  .register-link {
+    color: #5b9bd5;
+    text-decoration: none;
+  }
+  
