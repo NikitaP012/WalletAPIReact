@@ -69,11 +69,12 @@ function Dashboard() {
 
         {/* User Info Section */}
         <div className="user-info">
+         
+          <span className="user-name">{userName || 'Loading...'}</span> {/* Display user's name or 'Loading...' */}
           <div className="profile-logo">
             {/* Display the first letter of the user's name as the logo */}
             <span>{userName ? userName.charAt(0) : 'U'}</span>
           </div>
-          <span className="user-name">{userName || 'Loading...'}</span> {/* Display user's name or 'Loading...' */}
           <button onClick={handleLogout}>Logout</button>
         </div>
       </header>
