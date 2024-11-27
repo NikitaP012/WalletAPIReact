@@ -1,0 +1,24 @@
+/* Add this to your CSS file */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  th, td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
+  
+  .error-message {
+    color: red;
+    font-weight: bold;
+  }
+  h2{
+    text-align: center;
+  }

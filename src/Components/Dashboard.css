@@ -37,7 +37,7 @@
     color: white;
     cursor: pointer;
     margin-right: 15px;
-    display: none; /* Hidden by default */
+    display: none;
 }
 
 .logo {
@@ -45,7 +45,7 @@
     font-weight: bold;
 }
 
-/* Header - Right Section */
+/*header right section */
 .user-info {
     display: flex;
     align-items: center;
@@ -68,6 +68,24 @@
     font-size: 14px;
     font-weight: bold;
 }
+
+/* User Info Section - Logout Button */
+.user-info button {
+    background-color: #f44336; /* Red color for logout */
+    color: white; /* White text */
+    font-size: 14px; /* Set font size */
+    padding: 8px 15px; /* Padding around the text */
+    border: none; /* Remove the border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Change cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth transition for background color */
+}
+
+/* Hover effect for logout button */
+.user-info button:hover {
+    background-color: #d32f2f; /* Darker red on hover */
+}
+
 
 /* Sidebar styling */
 .dashboard-sidebar {
@@ -92,7 +110,7 @@
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 35px; /* Space between options */
+    justify-content: space-around; /* Space between options */
 }
 
 .dashboard-sidebar nav ul li {
@@ -125,18 +143,18 @@
 /* Mobile view adjustments */
 @media (max-width: 768px) {
     .hamburger-menu {
-        display: block; /* Show hamburger in mobile view */
+        display: block; 
     }
 
     .dashboard-sidebar {
-        transform: translateX(-100%); /* Hide sidebar by default */
+        transform: translateX(-100%); 
     }
 
     .dashboard-sidebar.open {
-        transform: translateX(0); /* Show sidebar on toggle */
+        transform: translateX(0); 
     }
 
     .dashboard-content {
-        margin-left: 0; /* Content takes full width */
+        margin-left: 0; 
     }
 }

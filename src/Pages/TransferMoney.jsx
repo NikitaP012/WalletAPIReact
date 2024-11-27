@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./TransferMoney.css"; // Import CSS file
 
 const TransferMoney = () => {
@@ -7,10 +7,54 @@ const TransferMoney = () => {
     amount: "",
     reason: "",
   });
-  const [currentBalance, setCurrentBalance] = useState(null);
-  const [errorMessage, setErrorMessage] = useState("");
-  const [totalBalance, setTotalBalance] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [totalBalance, setTotalBalance] = useState(0); // Current balance
+  const [error, setError] = useState(""); // Error state
+  const [success, setSuccess] = useState(""); // Success message state
+  const [loading, setLoading] = useState(true); // Loading state
+
+  // Fetch the current balance when the component mounts
+  const fetchCurrentBalance = async () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      setError("You are not logged in. Please log in again.");
+      setLoading(false);
+      return;
+    }
+
+    setLoading(true);
+    setError('');
+    setSuccess('');
+
+    try {
+      const response = await fetch("http://localhost:8081/checkBalance", {
+        method: "GET",
+        headers: {
+          Authorization: `${token}`,
+        },
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setTotalBalance(data.TotalBalance); // Set the current balance
+        setError('');
+      } else {
+        setError(data.message || "Failed to fetch current balance.");
+        setTotalBalance(0); // In case of error, set balance to 0
+      }
+    } catch (error) {
+      console.error("Error fetching current balance:", error);
+      setError("An error occurred while fetching the balance. Please try again.");
+      setTotalBalance(0);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Call the fetchCurrentBalance function when the component mounts
+  useEffect(() => {
+    fetchCurrentBalance();
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -25,19 +69,17 @@ const TransferMoney = () => {
     const { mobileNumber, amount, reason } = formData;
 
     if (isNaN(amount) || amount <= 0) {
-      setErrorMessage("Invalid amount. Please enter a positive number.");
+      alert("Invalid amount. Please enter a positive number.");
       return;
     }
-    setLoading(true);
-    setErrorMessage("");
 
     try {
-      const token = localStorage.getItem("authToken");
+      const token = localStorage.getItem("token");
       if (!token) {
-        setErrorMessage("You are not logged in. Please log in again.");
+        setError("You are not logged in. Please log in again.");
         return;
       }
-     
+
       const response = await fetch("http://localhost:8081/transferBalance", {
         method: "POST",
         headers: {
@@ -52,24 +94,23 @@ const TransferMoney = () => {
       });
 
       const data = await response.json();
-
       if (response.ok) {
-        setTotalBalance(data.TotalBalance);
-        alert("Transaction Successful");
+        setTotalBalance(data.TotalBalance); // Update balance with the response
+        setSuccess("Transaction Successful");
+        setFormData({ mobileNumber: "", amount: "", reason: "" }); // Reset form fields
       } else {
-        alert(data.message || "Transaction failed.");
+        setError(data.message || "Transaction failed.");
       }
     } catch (error) {
       console.error("Error:", error);
-      setErrorMessage("An unexpected error occurred.");
-    }finally {
-      setLoading(false); // Stop loading
-  }
+      setError("An unexpected error occurred.");
+    }
   };
 
   return (
     <div className="transfer-container">
       <h2>Transfer Balance</h2>
+      
       <form className="transfer-form" onSubmit={handleSubmit}>
         <div>
           <label htmlFor="mobile">Mobile Number:</label>
@@ -85,7 +126,7 @@ const TransferMoney = () => {
         <div>
           <label htmlFor="amount">Amount:</label>
           <input
-            type="text"
+            type="number"
             id="amount"
             name="amount"
             value={formData.amount}
@@ -107,11 +148,15 @@ const TransferMoney = () => {
         <button type="submit">Transfer</button>
       </form>
 
+      {/* Display current balance */}
       <p className="current-balance">
-        <strong>Current Balance:</strong> {totalBalance !== null ? `$${totalBalance}` : `${currentBalance}`}
+        <strong>Current Balance:</strong> 
+        {loading ? "Loading..." : `$${totalBalance}`}
       </p>
 
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
+      {/* Display success or error message */}
+      {success && <p className="success-message">{success}</p>}
+      {error && <p className="error-message">{error}</p>}
     </div>
   );
 };
