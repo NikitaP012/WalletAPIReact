@@ -7,57 +7,48 @@ import './Login.css';
 const Login = () => {
 
 
-    const navigate = useNavigate();
-    const [error, setError] = useState('');
+  const navigate = useNavigate();
+
+
+  const [input, setInput] = useState({
+    email: '',
+    password: ''
+  })
+
+  const [error, setError] = useState("");
+
+  //  to store the login data into the localstorage
+
   
-    const [input, setInput] = useState({
-      email: '',
-      password: ''
-    })
-  
-    //  to store the login data into the localstorage
-  
-    const handleSubmit = (e) => {
-      e.preventDefault();
-  
-  
-      // API call to login endpoint
-      axios.post('http://localhost:8081/login', input, {
-        headers: { 'Content-Type': 'application/json' },
-      })
-      .then((response) => {
-  console.log(response);
-  
-          if (response.status === 200) {
-            console.log("response.data.token",response.data.token);
-            
-            localStorage.setItem('authToken', response.data.token);
-            alert(response.data.message);
-            navigate('/');
-          }
-          else if(response.status === 400){
-              alert(response.data.message)
-          }
-        else if(response.status === 401){
-          alert(response.data.message)
-        }
-        })
-        
-  
-        .catch((error) => {
-  
-            if (error.response) {
-                // Server responded with a status code out of the 2xx range
-                setError(error.response.data.message || 'Login failed. Please try again.');
-            } else if (error.request) {
-                // No response from the server
-                setError('No response from the server. Please try again later.');
-            } else {
-                // Other errors
-                setError('An error occurred. Please try again.');
-            }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post('http://localhost:8081/login',
+        input,
+        {
+          headers: { 'Content-Type': 'application/json' }
         });
+        
+        let token = response.data.token;        
+      if (response.status === 200) {
+        localStorage.setItem('token', token);        
+        navigate('/');
+      } else {
+        setError(response.data.message || "Registration failed");
+      }
     }
+    catch (error) {      
+      if (error.response.status === 400) {
+        setError(error.response.data.message || "password didnt match.");
+        // alert("password not matched")
+      } else if (error.response.status === 401) {
+        setError(error.response.data.message || "user not exist with this email address");
+      }
+    }
+  }
+
 
 
 
@@ -87,7 +78,10 @@ const Login = () => {
           <button type="submit" className="submit-button">Login</button>
           <p className="note">
             Don't have an account? <Link to="/register" className="register-link">Register here</Link>.
-          </p>
+          </p><br />
+          {error && <p className="error-message">{error}</p>}
+
+
         </form>
       </div>
     </div>

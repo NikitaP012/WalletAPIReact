@@ -7,7 +7,9 @@ const CheckBalance = () => {
 
   const fetchBalance = async () => {
     try {
-      const token = localStorage.getItem('authToken');
+      const token = localStorage.getItem('token');
+      console.log(localStorage.getItem('token'));
+
         if (!token) {
             setError("You are not logged in. Please log in again.");
             return;

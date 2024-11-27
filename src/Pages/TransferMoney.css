@@ -1,7 +1,7 @@
 /* Overall container styling */
 .transfer-container {
   max-width: 400px;
-  margin: 50px auto;
+  margin: 20px auto; /* Reduced top margin */
   padding: 20px;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -9,7 +9,8 @@
   background-color: #f9f9f9;
   font-family: 'Arial', sans-serif;
   text-align: center;
-bottom: 20px;
+  position: relative; /* Added for precise positioning if needed */
+  top: -30px; /* Adjust to move the box higher */
 }
 
 /* Heading styling */

@@ -8,7 +8,13 @@ function Dashboard() {
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
+  const token = localStorage.getItem('authToken');
+  const handleLogout = () => {
+    // Remove the token from localStorage
+    localStorage.removeItem(token);
+    navigator("/login")
 
+};
   return (
     <div className="dashboard-container">
       {/* Header Section */}
@@ -26,7 +32,7 @@ function Dashboard() {
       
         <div className="user-info">
           <span className="user-name">Nikita Phapale</span>
-          <div className="profile-logo">Profile Logo</div>
+        <button onClick={handleLogout}>Logout</button>
         </div>
       </header>
 

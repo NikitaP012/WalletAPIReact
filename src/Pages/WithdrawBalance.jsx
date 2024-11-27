@@ -6,6 +6,7 @@ const WithdrawBalance = () => {
     const [inputBalance, setInputBalance] = useState(''); // Input amount
     const [loading, setLoading] = useState(false); // Loading state
     const [error, setError] = useState(''); // Error messages
+    
 
     // Fetch or update balance
     const handleBalance = async (amount = 0) => {
@@ -59,7 +60,7 @@ const WithdrawBalance = () => {
 
         const amountToAdd = parseFloat(inputBalance);
         if (isNaN(amountToAdd) || amountToAdd <= 0) {
-            setError("Invalid amount. Please enter a number greater than 0.");
+            setError("Please enter valid amount.");
             return;
         }
 
@@ -90,6 +91,8 @@ const WithdrawBalance = () => {
             <div className="current-balance">
                 <h3>
                     Current Amount: {totalBalance !== null ? `${totalBalance}` : 'Loading...'}
+                    <br />
+                    {error && <p className="error-message">{error}</p>}
                 </h3>
             </div>
         </div>

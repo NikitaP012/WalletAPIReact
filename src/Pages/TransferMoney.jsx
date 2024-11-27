@@ -9,6 +9,8 @@ const TransferMoney = () => {
   });
   const [currentBalance, setCurrentBalance] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
+  const [totalBalance, setTotalBalance] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -23,9 +25,11 @@ const TransferMoney = () => {
     const { mobileNumber, amount, reason } = formData;
 
     if (isNaN(amount) || amount <= 0) {
-      alert("Invalid amount. Please enter a positive number.");
+      setErrorMessage("Invalid amount. Please enter a positive number.");
       return;
     }
+    setLoading(true);
+    setErrorMessage("");
 
     try {
       const token = localStorage.getItem("authToken");
@@ -33,7 +37,7 @@ const TransferMoney = () => {
         setErrorMessage("You are not logged in. Please log in again.");
         return;
       }
-
+     
       const response = await fetch("http://localhost:8081/transferBalance", {
         method: "POST",
         headers: {
@@ -50,7 +54,7 @@ const TransferMoney = () => {
       const data = await response.json();
 
       if (response.ok) {
-        setCurrentBalance(data.TotalBalance);
+        setTotalBalance(data.TotalBalance);
         alert("Transaction Successful");
       } else {
         alert(data.message || "Transaction failed.");
@@ -58,7 +62,9 @@ const TransferMoney = () => {
     } catch (error) {
       console.error("Error:", error);
       setErrorMessage("An unexpected error occurred.");
-    }
+    }finally {
+      setLoading(false); // Stop loading
+  }
   };
 
   return (
@@ -102,7 +108,7 @@ const TransferMoney = () => {
       </form>
 
       <p className="current-balance">
-        <strong>Current Balance:</strong> {currentBalance !== null ? `$${currentBalance}` : `${currentBalance}`}
+        <strong>Current Balance:</strong> {totalBalance !== null ? `$${totalBalance}` : `${currentBalance}`}
       </p>
 
       {errorMessage && <p className="error-message">{errorMessage}</p>}
