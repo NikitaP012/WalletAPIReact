@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import './TransactionHistory.css';
 
 const TransactionHistory = () => {
-  const [transactions, setTransactions] = useState([]); // State to store transaction data
-  const [error, setError] = useState(""); // State for errors
-  const [loading, setLoading] = useState(true); // State for loading
+  const [transactions, setTransactions] = useState([]); 
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true); 
 
-  // Fetch balance data when component mounts
+  
   useEffect(() => {
     const fetchBalance = async () => {
       try {
@@ -16,7 +16,7 @@ const TransactionHistory = () => {
           return;
         }
 
-        // Fetch user data from the API
+        
         const response = await fetch('http://localhost:8081/transactionHistory', {
           method: 'GET',
           headers: {
@@ -39,26 +39,27 @@ const TransactionHistory = () => {
         const data = await response.json();
         console.log(data);
 
-        // Update state with the transactions
+       
         setTransactions(data.Transactions);
-        setLoading(false); // Set loading to false after data is fetched
+        setLoading(false); 
 
       } catch (error) {
         console.error('Error:', error);
+        setLoading(false);
         setError("An error occurred while fetching user data.");
-        setLoading(false); // Set loading to false in case of error
+     
       }
     };
 
     fetchBalance();
-  }, []); // Empty dependency array means this effect runs once when the component mounts
+  }, []); 
 
-  // If loading, show a loading message
+
   if (loading) {
     return <div>Loading...</div>;
   }
 
-  // If there is an error, display the error message
+ 
   if (error) {
     return <div className="error-message">{error}</div>;
   }

@@ -9,7 +9,7 @@ function Dashboard() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [userName, setUserName] = useState('');
   const navigate = useNavigate(); // To navigate after logout
-  
+
   // Toggle the sidebar open/close
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -17,16 +17,16 @@ function Dashboard() {
 
   // Retrieve the token and decode it
   useEffect(() => {
-   const token = localStorage.getItem('token');
-   if (!token) {
-    // If there's no token, redirect to login page
-    navigate("/login");
-    return; // Exit early
-  }
+    const token = localStorage.getItem('token');
+    if (!token) {
+      // If there's no token, redirect to login page
+      navigate("/login");
+      return; // Exit early
+    }
     if (token) {
       try {
         const decodedToken = jwtDecode(token);  // Decode the token
-        
+
         // Log the decoded token to check its structure
         console.log("Decoded Token:", decodedToken);
 
@@ -69,13 +69,16 @@ function Dashboard() {
 
         {/* User Info Section */}
         <div className="user-info">
-         
+
           <span className="user-name">{userName || 'Loading...'}</span> {/* Display user's name or 'Loading...' */}
           <div className="profile-logo">
             {/* Display the first letter of the user's name as the logo */}
             <span>{userName ? userName.charAt(0) : 'U'}</span>
           </div>
           <button onClick={handleLogout}>Logout</button>
+          <button className="edit-profile-button" onClick={() => navigate("edit-profile")} >
+            Edit Profile
+          </button>
         </div>
       </header>
 

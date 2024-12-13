@@ -9,6 +9,7 @@ import WithdrawBalance from './Pages/WithdrawBalance';
 import CheckBalance from './Pages/CheckBalance';
 import TransferMoney from './Pages/TransferMoney';
 import TransactionHistory from './Pages/TransactionHistory';
+import EditProfile from './Components/EditProfile';
 const App = () => {
   return (
     <BrowserRouter>
@@ -27,6 +28,7 @@ const App = () => {
             <Route path="/transfer-money" element={<TransferMoney />}/>
             <Route path="/check-balance" element={<CheckBalance/>} />
             <Route path="/transaction-history" element={<TransactionHistory />}/>
+            <Route path='/edit-profile' element={<EditProfile/>}/>
 
             </Route>
       </Routes>

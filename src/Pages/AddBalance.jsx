@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import './AddBalance.css';
 
 const AddBalance = () => {
-    const [totalBalance, setTotalBalance] = useState(null); // Start as null to indicate loading state
-    const [inputBalance, setInputBalance] = useState(''); // Input amount
-    const [loading, setLoading] = useState(false); // Loading state
-    const [error, setError] = useState(''); // Error messages
-    const [success, setSuccess] = useState(""); // State for success message
+    const [totalBalance, setTotalBalance] = useState(null); 
+    const [inputBalance, setInputBalance] = useState(''); 
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(''); 
+    const [success, setSuccess] = useState(""); 
 
-    // Function to fetch current balance
+    
     const fetchCurrentBalance = async () => {
         const token = localStorage.getItem('token');
         if (!token) {
@@ -17,7 +17,7 @@ const AddBalance = () => {
         }
 
         setLoading(true);
-        setError(""); // Clear previous errors
+        setError(""); 
 
         try {
             const response = await fetch("http://localhost:8081/checkBalance", {
@@ -30,7 +30,7 @@ const AddBalance = () => {
             const data = await response.json();
 
             if (response.ok) {
-                setTotalBalance(data.TotalBalance); // Set the current balance
+                setTotalBalance(data.TotalBalance); 
                 setError('');
             } else {
                 setError(data.message || "Failed to fetch current balance.");
@@ -44,7 +44,7 @@ const AddBalance = () => {
         }
     };
 
-    // Function to handle adding balance
+    
     const handleAddBalance = async (e) => {
         e.preventDefault();
 
@@ -62,8 +62,8 @@ const AddBalance = () => {
         }
 
         setLoading(true);
-        setError(""); // Clear previous errors
-        setSuccess(""); // Clear previous success message
+        setError(""); 
+        setSuccess(""); 
 
         try {
             const response = await fetch('http://localhost:8081/addbalance', {
@@ -78,9 +78,9 @@ const AddBalance = () => {
             const data = await response.json();
 
             if (response.status === 200) {
-                setTotalBalance(data.TotalBalance); // Update balance
-                setSuccess(data.message || "Balance added successfully!"); // Display success message
-                setInputBalance(''); // Clear input field
+                setTotalBalance(data.TotalBalance);
+                setSuccess(data.message || "Balance added successfully!"); 
+                setInputBalance(''); 
                 setTimeout(() => setSuccess(""), 2000);
             } else {
                 setError(data?.message || "Failed to add balance.");
@@ -89,12 +89,12 @@ const AddBalance = () => {
             console.error('Error adding balance:', error);
             setError("An error occurred while adding balance. Please try again.");
         } finally {
-            setLoading(false); // Stop loading
+            setLoading(false);
         }
     };
 
     useEffect(() => {
-        fetchCurrentBalance(); // Fetch current balance when the component loads
+        fetchCurrentBalance();
     }, []);
 
     return (

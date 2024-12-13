@@ -1,0 +1,95 @@
+/* Scoped styles for Edit Profile */
+.edit-profile-container {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 30px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  height: auto; 
+}
+
+.edit-profile-container h2 {
+  text-align: center;
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.edit-profile-container form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px; /* Reduced gap for better spacing on mobile */
+  align-items: center;
+}
+
+.edit-profile-container label {
+  display: flex;
+  justify-content: flex-end; /* Align label text to the right */
+  font-size: 1rem;
+  color: #555;
+  margin-right: 10px;
+}
+
+/* Common styles for all input fields */
+.edit-profile-container input {
+  width: 90%; /* Adjusted width for better alignment */
+  padding: 8px 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+/* Styling for readonly fields */
+.edit-profile-container input[readonly] {
+  background-color: #eaeaea;
+  color: #777;
+}
+
+/* Button Styling */
+.edit-profile-container button {
+  grid-column: span 2; /* Span button across two columns */
+  padding: 10px;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 0 auto; /* Center the button */
+  display: block;
+  width: 30%; /* Ensure button stays within container width */
+}
+
+.edit-profile-container button:hover {
+  background-color: #0056b3;
+}
+
+.edit-profile-container button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .edit-profile-container form {
+    grid-template-columns: 1fr; /* Single-column layout on small screens */
+    gap: 15px; /* Adjusted gap for smaller screens */
+  }
+
+  .edit-profile-container label {
+    justify-content: flex-start; /* Align labels to the left */
+    margin-right: 0; /* Remove margin on smaller screens */
+  }
+
+  .edit-profile-container input {
+    width: 100%; /* Full width inputs on smaller screens */
+  }
+
+  .edit-profile-container button {
+    width: 80%; /* Button takes 80% width on smaller screens */
+  }
+}

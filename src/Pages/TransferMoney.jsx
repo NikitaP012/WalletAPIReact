@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./TransferMoney.css"; // Import CSS file
+import "./TransferMoney.css"; 
 
 const TransferMoney = () => {
   const [formData, setFormData] = useState({
@@ -7,12 +7,12 @@ const TransferMoney = () => {
     amount: "",
     reason: "",
   });
-  const [totalBalance, setTotalBalance] = useState(0); // Current balance
-  const [error, setError] = useState(""); // Error state
-  const [success, setSuccess] = useState(""); // Success message state
-  const [loading, setLoading] = useState(true); // Loading state
+  const [totalBalance, setTotalBalance] = useState(0); 
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState(""); 
+  const [loading, setLoading] = useState(true);
 
-  // Fetch the current balance when the component mounts
+
   const fetchCurrentBalance = async () => {
     const token = localStorage.getItem('token');
     if (!token) {
@@ -36,11 +36,11 @@ const TransferMoney = () => {
       const data = await response.json();
 
       if (response.ok) {
-        setTotalBalance(data.TotalBalance); // Set the current balance
+        setTotalBalance(data.TotalBalance)
         setError('');
       } else {
         setError(data.message || "Failed to fetch current balance.");
-        setTotalBalance(0); // In case of error, set balance to 0
+        setTotalBalance(0); 
       }
     } catch (error) {
       console.error("Error fetching current balance:", error);
@@ -51,7 +51,7 @@ const TransferMoney = () => {
     }
   };
 
-  // Call the fetchCurrentBalance function when the component mounts
+ 
   useEffect(() => {
     fetchCurrentBalance();
   }, []);
@@ -95,9 +95,9 @@ const TransferMoney = () => {
 
       const data = await response.json();
       if (response.ok) {
-        setTotalBalance(data.TotalBalance); // Update balance with the response
+        setTotalBalance(data.TotalBalance); 
         setSuccess("Transaction Successful");
-        setFormData({ mobileNumber: "", amount: "", reason: "" }); // Reset form fields
+        setFormData({ mobileNumber: "", amount: "", reason: "" }); 
       } else {
         setError(data.message || "Transaction failed.");
       }
@@ -148,13 +148,13 @@ const TransferMoney = () => {
         <button type="submit">Transfer</button>
       </form>
 
-      {/* Display current balance */}
+   
       <p className="current-balance">
         <strong>Current Balance:</strong> 
         {loading ? "Loading..." : `$${totalBalance}`}
       </p>
 
-      {/* Display success or error message */}
+  
       {success && <p className="success-message">{success}</p>}
       {error && <p className="error-message">{error}</p>}
     </div>

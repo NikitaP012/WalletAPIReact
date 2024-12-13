@@ -17,7 +17,7 @@ const Login = () => {
 
   const [error, setError] = useState("");
 
-  //  to store the login data into the localstorage
+
 
   
 
